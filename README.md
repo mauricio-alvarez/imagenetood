@@ -1,7 +1,7 @@
 # [ImageNet-OOD: Deciphering Modern Out-of-distribution Detection Algorithms]()
 
 ## Setup
-Download the following datasets: [ImageNet-1K](https://image-net.org/), [ImageNet-21k-P](https://github.com/Alibaba-MIIL/ImageNet21K/blob/main/dataset_preprocessing/processing_instructions.md), [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch), [ImageNet-R](https://github.com/hendrycks/imagenet-rS), ImageNet-C(https://github.com/hendrycks/robustness), and OpenImage-O(https://github.com/haoqiwang/vim).
+Download the following datasets: [ImageNet-1K](https://image-net.org/), [ImageNet-21k-P](https://github.com/Alibaba-MIIL/ImageNet21K/blob/main/dataset_preprocessing/processing_instructions.md), [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch), [ImageNet-R](https://github.com/hendrycks/imagenet-r), [ImageNet-C](https://github.com/hendrycks/robustness), and [OpenImage-O](https://github.com/haoqiwang/vim).
 
 Create the conda environment
 ```
