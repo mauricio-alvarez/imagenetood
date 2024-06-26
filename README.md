@@ -13,9 +13,7 @@ pip install -r requirements.txt
 ## Analysis
 First, preprocess logits and features of a subset of ImageNet-1K with the following command
 ```
-python preprocess.py --subset_file imagenet_random_200k.txt -
--imagenet_path [path of the imagenet-1k train set] --result_pat
-h .
+python preprocess.py --subset_file imagenet_random_200k.txt --imagenet_path [path of the imagenet-1k train set] --result_path .
 ```
 Next, generate the OOD scores for each of the datasets (both in-distribution and out-of-distribution) with the command
 ```
