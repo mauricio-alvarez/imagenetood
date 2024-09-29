@@ -1,4 +1,4 @@
-from dataset import ImageNet_Format, ImageNet_Subset, Generic_Subset
+from dataset import ImageNet_Format, ImageNet_Subset, Generic_Subset, ImageNetOOD_standalone
 
 
 def get_openimageo(path, transform=None):
@@ -9,4 +9,5 @@ list_of_datasets = {
     "ImageNet": ImageNet_Format,
     "ImageNet_subset": ImageNet_Subset,
     "OpenImageO": get_openimageo,
+    "ImageNetOOD": ImageNetOOD_standalone,
 }

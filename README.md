@@ -1,4 +1,6 @@
-# [ImageNet-OOD: Deciphering Modern Out-of-distribution Detection Algorithms]()
+# [ImageNet-OOD: Deciphering Modern Out-of-distribution Detection Algorithms](https://arxiv.org/abs/2310.01755)
+
+Update: ImageNet-OOD images by itself can be found on the download section of https://image-net.org/
 
 ## Setup
 Download the following datasets: [ImageNet-1K](https://image-net.org/), [ImageNet-21k-P](https://github.com/Alibaba-MIIL/ImageNet21K/blob/main/dataset_preprocessing/processing_instructions.md), [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch), [ImageNet-R](https://github.com/hendrycks/imagenet-r), [ImageNet-C](https://github.com/hendrycks/robustness), and [OpenImage-O](https://github.com/haoqiwang/vim).
@@ -17,7 +19,7 @@ python preprocess.py --subset_file imagenet_random_200k.txt --imagenet_path [pat
 ```
 Next, generate the OOD scores for each of the datasets (both in-distribution and out-of-distribution) with the command
 ```
-python generate_scores.py --dataset [ImageNet(any image net format dataset)/ImageNetOOD/OpenImageO] --root_path [path of the dataset] --subset_file [file that provide the subset (only used for ImageNetOOD and OpenImageO).] --result_file [output pickle file] --semantic [0 if the dataset non-semantic shift (ImageNet-1K/R/C/Sketch), 1 if the dataset is semantic shift (ImageNet-OOD, OpenImageO)]
+python generate_scores.py --dataset [ImageNet(any image net format dataset)/ImageNetOOD/OpenImageO/ImageNetOOD_standalone] --root_path [path of the dataset] --subset_file [file that provide the subset (only used for ImageNetOOD and OpenImageO).] --result_file [output pickle file] --semantic [0 if the dataset non-semantic shift (ImageNet-1K/R/C/Sketch), 1 if the dataset is semantic shift (ImageNet-OOD, OpenImageO)]
 ```
 Finally, use similarity_analysis.ipynb for analysis done in Figure 3 of the paper or obtain the OOD detection performance by running
 ```

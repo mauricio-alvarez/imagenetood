@@ -69,6 +69,8 @@ if __name__ == "__main__":
         dataset = ImageNetOOD(imagenet_path = args.root_path, subset_file = args.subset_file, transform=transform)
     elif dataset == 'OpenImageO':
         dataset = Generic_Subset(path=args.root_path, subset_file=args.subset_file, transform=transform)
+    elif dataset == 'ImageNetOOD_standalone':
+        dataset = ImageNetOOD_standalone(path=args.root_path, transform=transform)
     else:
         assert False, "not a valid dataset"
     out_dataloader = DataLoader(
