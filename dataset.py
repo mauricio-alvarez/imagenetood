@@ -90,30 +90,7 @@ class Generic_Subset(Dataset):
         if self.transform is not None:
             img = self.transform(img)
         return img, 0
-
-
-
-class ImageNetOOD(Dataset):
-    def __init__(self, imagenet_path, subset_file, transform=None):
-        self.data = []
-        self.transform = transform
-        with open(subset_file) as f:
-            for line in f:
-                sub_path = line.rstrip()
-                new_path = os.path.join(imagenet_path, sub_path)
-                self.data.append(
-                    (new_path, -1))
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, index):
-        img_path, label = self.data[index]
-        img = Image.open(img_path).convert('RGB')
-        if self.transform is not None:
-            img = self.transform(img)
-        return img, label
-
+        
 
 class ImageNetOOD_standalone(Dataset):
     def __init__(self, path, transform=None):
