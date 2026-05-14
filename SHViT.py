@@ -1,0 +1,649 @@
+import random
+import numpy as np
+import json
+import requests
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.backends.cudnn as cudnn
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+import torchvision
+import itertools
+import timm
+from timm.models.vision_transformer import trunc_normal_
+from timm.models.layers import SqueezeExcite
+from timm.models.registry import register_model
+from PIL import ImageFile
+from torchvision import transforms
+from PIL import Image
+import os
+import matplotlib.pyplot as plt
+import torch.optim as optim
+from tqdm import tqdm
+import copy
+
+
+class GroupNorm(torch.nn.GroupNorm):
+    """
+    Group Normalization with 1 group.
+    Input: tensor in shape [B, C, H, W]
+    """
+    def __init__(self, num_channels, **kwargs):
+        super().__init__(1, num_channels, **kwargs)
+
+
+class Conv2d_BN(torch.nn.Sequential):
+    def __init__(self, a, b, ks=1, stride=1, pad=0, dilation=1,
+                 groups=1, bn_weight_init=1):
+        super().__init__()
+        self.add_module('c', torch.nn.Conv2d(
+            a, b, ks, stride, pad, dilation, groups, bias=False))
+        self.add_module('bn', torch.nn.BatchNorm2d(b))
+        torch.nn.init.constant_(self.bn.weight, bn_weight_init)
+        torch.nn.init.constant_(self.bn.bias, 0)
+
+    @torch.no_grad()
+    def fuse(self):
+        c, bn = self._modules.values()
+        w = bn.weight / (bn.running_var + bn.eps)**0.5
+        w = c.weight * w[:, None, None, None]
+        b = bn.bias - bn.running_mean * bn.weight / \
+            (bn.running_var + bn.eps)**0.5
+        m = torch.nn.Conv2d(w.size(1) * self.c.groups, w.size(
+            0), w.shape[2:], stride=self.c.stride, padding=self.c.padding, dilation=self.c.dilation, groups=self.c.groups,
+            device=c.weight.device)
+        m.weight.data.copy_(w)
+        m.bias.data.copy_(b)
+        return m
+
+
+class BN_Linear(torch.nn.Sequential):
+    def __init__(self, a, b, bias=True, std=0.02):
+        super().__init__()
+        self.add_module('bn', torch.nn.BatchNorm1d(a))
+        self.add_module('l', torch.nn.Linear(a, b, bias=bias))
+        trunc_normal_(self.l.weight, std=std)
+        if bias:
+            torch.nn.init.constant_(self.l.bias, 0)
+
+    @torch.no_grad()
+    def fuse(self):
+        bn, l = self._modules.values()
+        w = bn.weight / (bn.running_var + bn.eps)**0.5
+        b = bn.bias - self.bn.running_mean * \
+            self.bn.weight / (bn.running_var + bn.eps)**0.5
+        w = l.weight * w[None, :]
+        if l.bias is None:
+            b = b @ self.l.weight.T
+        else:
+            b = (l.weight @ b[:, None]).view(-1) + self.l.bias
+        m = torch.nn.Linear(w.size(1), w.size(0))
+        m.weight.data.copy_(w)
+        m.bias.data.copy_(b)
+        return m
+
+
+class PatchMerging(torch.nn.Module):
+    def __init__(self, dim, out_dim):
+        super().__init__()
+        hid_dim = int(dim * 4)
+        self.conv1 = Conv2d_BN(dim, hid_dim, 1, 1, 0)
+        self.act = torch.nn.ReLU()
+        self.conv2 = Conv2d_BN(hid_dim, hid_dim, 3, 2, 1, groups=hid_dim)
+        self.se = SqueezeExcite(hid_dim, .25)
+        self.conv3 = Conv2d_BN(hid_dim, out_dim, 1, 1, 0)
+
+    def forward(self, x):
+        x = self.conv3(self.se(self.act(self.conv2(self.act(self.conv1(x))))))
+        return x
+
+
+class Residual(torch.nn.Module):
+    def __init__(self, m, drop=0.):
+        super().__init__()
+        self.m = m
+        self.drop = drop
+
+    def forward(self, x):
+        if self.training and self.drop > 0:
+            return x + self.m(x) * torch.rand(x.size(0), 1, 1, 1,
+                                              device=x.device).ge_(self.drop).div(1 - self.drop).detach()
+        else:
+            return x + self.m(x)
+    
+    @torch.no_grad()
+    def fuse(self):
+        if isinstance(self.m, Conv2d_BN):
+            m = self.m.fuse()
+            assert(m.groups == m.in_channels)
+            identity = torch.ones(m.weight.shape[0], m.weight.shape[1], 1, 1)
+            identity = torch.nn.functional.pad(identity, [1,1,1,1])
+            m.weight += identity.to(m.weight.device)
+            return m
+        else:
+            return self
+
+
+class FFN(torch.nn.Module):
+    def __init__(self, ed, h):
+        super().__init__()
+        self.pw1 = Conv2d_BN(ed, h)
+        self.act = torch.nn.ReLU()
+        self.pw2 = Conv2d_BN(h, ed, bn_weight_init=0)
+
+    def forward(self, x):
+        x = self.pw2(self.act(self.pw1(x)))
+        return x
+        
+
+class SHSA(torch.nn.Module):
+    """Single-Head Self-Attention"""
+    def __init__(self, dim, qk_dim, pdim):
+        super().__init__()
+        self.scale = qk_dim ** -0.5
+        self.qk_dim = qk_dim
+        self.dim = dim
+        self.pdim = pdim
+
+        self.pre_norm = GroupNorm(pdim)
+
+        self.qkv = Conv2d_BN(pdim, qk_dim * 2 + pdim)
+        self.proj = torch.nn.Sequential(torch.nn.ReLU(), Conv2d_BN(
+            dim, dim, bn_weight_init = 0))
+        
+
+    def forward(self, x):
+        B, C, H, W = x.shape
+        x1, x2 = torch.split(x, [self.pdim, self.dim - self.pdim], dim = 1)
+        x1 = self.pre_norm(x1)
+        qkv = self.qkv(x1)
+        q, k, v = qkv.split([self.qk_dim, self.qk_dim, self.pdim], dim = 1)
+        q, k, v = q.flatten(2), k.flatten(2), v.flatten(2)
+        
+        attn = (q.transpose(-2, -1) @ k) * self.scale
+        attn = attn.softmax(dim = -1)
+        x1 = (v @ attn.transpose(-2, -1)).reshape(B, self.pdim, H, W)
+        x = self.proj(torch.cat([x1, x2], dim = 1))
+
+        return x
+
+
+class BasicBlock(torch.nn.Module):
+    def __init__(self, dim, qk_dim, pdim, type):
+        super().__init__()
+        if type == "s":    # for later stages
+            self.conv = Residual(Conv2d_BN(dim, dim, 3, 1, 1, groups = dim, bn_weight_init = 0))
+            self.mixer = Residual(SHSA(dim, qk_dim, pdim))
+            self.ffn = Residual(FFN(dim, int(dim * 2)))
+        elif type == "i":   # for early stages
+            self.conv = Residual(Conv2d_BN(dim, dim, 3, 1, 1, groups = dim, bn_weight_init = 0))
+            self.mixer = torch.nn.Identity()
+            self.ffn = Residual(FFN(dim, int(dim * 2)))
+    
+    def forward(self, x):
+        return self.ffn(self.mixer(self.conv(x)))
+
+
+class SHViT(torch.nn.Module):
+    def __init__(self,
+                 in_chans=3,
+                 num_classes=1000,
+                 embed_dim=[128, 256, 384],
+                 partial_dim = [32, 64, 96],
+                 qk_dim=[16, 16, 16],
+                 depth=[1, 2, 3],
+                 types = ["s", "s", "s"],
+                 down_ops=[['subsample', 2], ['subsample', 2], ['']],
+                 distillation=False,):
+        super().__init__()
+
+        # Patch embedding
+        self.patch_embed = torch.nn.Sequential(Conv2d_BN(in_chans, embed_dim[0] // 8, 3, 2, 1), torch.nn.ReLU(),
+                           Conv2d_BN(embed_dim[0] // 8, embed_dim[0] // 4, 3, 2, 1), torch.nn.ReLU(),
+                           Conv2d_BN(embed_dim[0] // 4, embed_dim[0] // 2, 3, 2, 1), torch.nn.ReLU(),
+                           Conv2d_BN(embed_dim[0] // 2, embed_dim[0], 3, 2, 1))
+
+        self.blocks1 = []
+        self.blocks2 = []
+        self.blocks3 = []
+
+        # Build SHViT blocks
+        for i, (ed, kd, pd, dpth, do, t) in enumerate(
+                zip(embed_dim, qk_dim, partial_dim, depth, down_ops, types)):
+            for d in range(dpth):
+                eval('self.blocks' + str(i+1)).append(BasicBlock(ed, kd, pd, t))
+            if do[0] == 'subsample':
+                # Build SHViT downsample block
+                #('Subsample' stride)
+                blk = eval('self.blocks' + str(i+2))
+                blk.append(torch.nn.Sequential(Residual(Conv2d_BN(embed_dim[i], embed_dim[i], 3, 1, 1, groups=embed_dim[i])),
+                                    Residual(FFN(embed_dim[i], int(embed_dim[i] * 2))),))
+                blk.append(PatchMerging(*embed_dim[i:i + 2]))
+                
+                blk.append(torch.nn.Sequential(Residual(Conv2d_BN(embed_dim[i + 1], embed_dim[i + 1], 3, 1, 1, groups=embed_dim[i + 1])),
+                                    Residual(FFN(embed_dim[i + 1], int(embed_dim[i + 1] * 2))),))
+        self.blocks1 = torch.nn.Sequential(*self.blocks1)
+        self.blocks2 = torch.nn.Sequential(*self.blocks2)
+        self.blocks3 = torch.nn.Sequential(*self.blocks3)
+        
+        # Classification head
+        self.head = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
+        self.distillation = distillation
+        if distillation:
+            self.head_dist = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
+
+    def forward(self, x):
+        x = self.patch_embed(x)
+        x = self.blocks1(x)
+        x = self.blocks2(x)
+        x = self.blocks3(x)
+        x = torch.nn.functional.adaptive_avg_pool2d(x, 1).flatten(1)
+        if self.distillation:
+            x = self.head(x), self.head_dist(x)
+            if not self.training:
+                x = (x[0] + x[1]) / 2
+        else:
+            x = self.head(x)
+        return x
+
+
+    '''
+Build the SHViT model family
+'''
+SHViT_s1 = {
+        'embed_dim': [128, 224, 320],
+        'depth': [2, 4, 5],
+        'partial_dim': [32, 48, 68],
+        'types' : ["i", "s", "s"]
+    }
+
+def shvit_s1(num_classes=1000, pretrained=False, distillation=False, fuse=False, pretrained_cfg=None, model_cfg=SHViT_s1):
+    model = SHViT(num_classes=num_classes, distillation=distillation, **model_cfg)
+    if pretrained:
+        pretrained = _checkpoint_url_format.format(pretrained)
+        checkpoint = torch.hub.load_state_dict_from_url(
+            pretrained, map_location='cpu')
+        d = checkpoint['model']
+        D = model.state_dict()
+        for k in d.keys():
+            if D[k].shape != d[k].shape:
+                d[k] = d[k][:, :, None, None]
+        model.load_state_dict(d)
+    if fuse:
+        replace_batchnorm(model)
+    return model
+
+
+SHViT_s2 = {
+        'embed_dim': [128, 308, 448],
+        'depth': [2, 4, 5],
+        'partial_dim': [32, 66, 96],
+        'types' : ["i", "s", "s"]
+    }
+
+
+def shvit_s2(num_classes=1000, pretrained=False, distillation=False, fuse=False, pretrained_cfg=None, model_cfg=SHViT_s2):
+    model = SHViT(num_classes=num_classes, distillation=distillation, **model_cfg)
+    if pretrained:
+        pretrained = _checkpoint_url_format.format(pretrained)
+        checkpoint = torch.hub.load_state_dict_from_url(
+            pretrained, map_location='cpu')
+        d = checkpoint['model']
+        D = model.state_dict()
+        for k in d.keys():
+            if D[k].shape != d[k].shape:
+                d[k] = d[k][:, :, None, None]
+        model.load_state_dict(d)
+    if fuse:
+        replace_batchnorm(model)
+    return model
+
+
+SHViT_s3 = {
+        'embed_dim': [192, 352, 448],
+        'depth': [3, 5, 5],
+        'partial_dim': [48, 75, 96],
+        'types' : ["i", "s", "s"]
+    }
+
+
+def shvit_s3(num_classes=1000, pretrained=False, distillation=False, fuse=False, pretrained_cfg=None, model_cfg=SHViT_s3):
+    model = SHViT(num_classes=num_classes, distillation=distillation, **model_cfg)
+    if pretrained:
+        pretrained = _checkpoint_url_format.format(pretrained)
+        checkpoint = torch.hub.load_state_dict_from_url(
+            pretrained, map_location='cpu')
+        d = checkpoint['model']
+        D = model.state_dict()
+        for k in d.keys():
+            if D[k].shape != d[k].shape:
+                d[k] = d[k][:, :, None, None]
+        model.load_state_dict(d)
+    if fuse:
+        replace_batchnorm(model)
+    return model
+
+
+SHViT_s4 = {
+        'embed_dim': [224, 336, 448],
+        'depth': [4, 7, 6],
+        'partial_dim': [48, 72, 96],
+        'types' : ["i", "s", "s"]
+    }
+
+
+def shvit_s4(num_classes=1000, pretrained=False, distillation=False, fuse=False, pretrained_cfg=None, model_cfg=SHViT_s4):
+    model = SHViT(num_classes=num_classes, distillation=distillation, **model_cfg)
+    if pretrained:
+        pretrained = _checkpoint_url_format.format(pretrained)
+        checkpoint = torch.hub.load_state_dict_from_url(
+            pretrained, map_location='cpu')
+        d = checkpoint['model']
+        D = model.state_dict()
+        for k in d.keys():
+            if D[k].shape != d[k].shape:
+                d[k] = d[k][:, :, None, None]
+        model.load_state_dict(d)
+    if fuse:
+        replace_batchnorm(model)
+    return model
+
+def build_shvit(shvit_name, location, classes_output=1000):
+    if shvit_name == 'shvit_s1':
+      shvit = shvit_s1(num_classes=1000)
+    elif shvit_name == 'shvit_s2':
+      shvit = shvit_s2(num_classes=classes_output)
+    elif shvit_name == 'shvit_s3':
+      shvit = shvit_s3(num_classes=classes_output)
+    elif shvit_name == 'shvit_s4':
+      shvit = shvit_s4(num_classes=classes_output)
+    else:
+      print("ADD A VALID MODEL NAME: [s1,s2,s3,s4] ")
+      return
+    checkpoint = torch.load(location, map_location="cuda")
+    if isinstance(checkpoint, dict) and "model" in checkpoint:
+      state_dict = checkpoint["model"]
+    else:
+      state_dict = checkpoint
+    shvit.load_state_dict(state_dict)
+    if classes_output != 1000:
+      in_features_for_new_head = shvit.head.l.in_features
+      shvit.head.l = nn.Linear(in_features_for_new_head, classes_output, bias=True)
+
+    return shvit
+
+def replace_batchnorm(net):
+    for child_name, child in net.named_children():
+        if hasattr(child, 'fuse'):
+            fused = child.fuse()
+            setattr(net, child_name, fused)
+            replace_batchnorm(fused)
+        elif isinstance(child, torch.nn.BatchNorm2d):
+            setattr(net, child_name, torch.nn.Identity())
+        else:
+            replace_batchnorm(child)
+
+class DoubleHeadSHViT(nn.Module):
+    def __init__(self,
+                 in_chans=3,
+                 num_classes=1000,
+                 embed_dim=[128, 224, 320],
+                 qk_dim=[16, 16, 16],
+                 partial_dim=[32, 48, 68],
+                 depth=[2, 4, 5],
+                 types=["i", "s", "s"],
+                 down_ops=[['subsample', 2], ['subsample', 2], ['']],
+                 distillation=False):
+        super().__init__()
+
+        # --- SHARED STEM ---
+        self.patch_embed = nn.Sequential(
+            Conv2d_BN(in_chans, embed_dim[0] // 8, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 8, embed_dim[0] // 4, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 4, embed_dim[0] // 2, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 2, embed_dim[0], 3, 2, 1)
+        )
+
+        # --- SHARED STAGE 1 ---
+        # FIX: Use a list and unpack to Sequential to get default keys "0", "1", ...
+        blocks1_layers = []
+        for d in range(depth[0]):
+            blocks1_layers.append(BasicBlock(embed_dim[0], qk_dim[0], partial_dim[0], types[0]))
+        self.blocks1 = nn.Sequential(*blocks1_layers)
+
+        # --- BRANCH A (Head A) ---
+        self.ds_1_to_2_A = self._make_downsample(embed_dim, 0)
+        self.blocks2_A = self._make_stage(embed_dim[1], qk_dim[1], partial_dim[1], depth[1], types[1])
+        
+        self.ds_2_to_3_A = self._make_downsample(embed_dim, 1)
+        self.blocks3_A = self._make_stage(embed_dim[2], qk_dim[2], partial_dim[2], depth[2], types[2])
+
+        # --- BRANCH B (Head B) ---
+        self.ds_1_to_2_B = self._make_downsample(embed_dim, 0)
+        self.blocks2_B = self._make_stage(embed_dim[1], qk_dim[1], partial_dim[1], depth[1], types[1])
+        
+        self.ds_2_to_3_B = self._make_downsample(embed_dim, 1)
+        self.blocks3_B = self._make_stage(embed_dim[2], qk_dim[2], partial_dim[2], depth[2], types[2])
+
+        # --- FUSION ---
+        self.fusion_conv = Conv2d_BN(embed_dim[2] * 2, embed_dim[2], 1, 1, 0)
+        self.head = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else nn.Identity()
+
+    def _make_downsample(self, embed_dim, idx):
+        layers = []
+        # 1. Pre-proc (Matches original blocks[0])
+        layers.append(nn.Sequential(
+            Residual(Conv2d_BN(embed_dim[idx], embed_dim[idx], 3, 1, 1, groups=embed_dim[idx])),
+            Residual(FFN(embed_dim[idx], int(embed_dim[idx] * 2))),
+        ))
+        # 2. Patch Merging (Matches original blocks[1])
+        layers.append(PatchMerging(embed_dim[idx], embed_dim[idx+1]))
+        
+        # 3. Post-proc (Matches original blocks[2])
+        layers.append(nn.Sequential(
+            Residual(Conv2d_BN(embed_dim[idx+1], embed_dim[idx+1], 3, 1, 1, groups=embed_dim[idx+1])),
+            Residual(FFN(embed_dim[idx+1], int(embed_dim[idx+1] * 2))),
+        ))
+        return nn.Sequential(*layers)
+
+    def _make_stage(self, ed, kd, pd, dpth, typ):
+        layers = []
+        for d in range(dpth):
+            layers.append(BasicBlock(ed, kd, pd, typ))
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        x = self.patch_embed(x)
+        x = self.blocks1(x)
+
+        # Branch A
+        xA = self.ds_1_to_2_A(x)
+        xA = self.blocks2_A(xA)
+        xA = self.ds_2_to_3_A(xA)
+        xA = self.blocks3_A(xA)
+
+        # Branch B
+        xB = self.ds_1_to_2_B(x)
+        xB = self.blocks2_B(xB)
+        xB = self.ds_2_to_3_B(xB)
+        xB = self.blocks3_B(xB)
+
+        x_cat = torch.cat([xA, xB], dim=1)
+        x_fused = self.fusion_conv(x_cat)
+        
+        x_out = torch.nn.functional.adaptive_avg_pool2d(x_fused, 1).flatten(1)
+        x_out = self.head(x_out)
+        return x_out
+class TripleHeadSHViT(nn.Module):
+    def __init__(self,
+                 in_chans=3,
+                 num_classes=1000,
+                 embed_dim=[128, 224, 320],
+                 qk_dim=[16, 16, 16],
+                 partial_dim=[32, 48, 68],
+                 depth=[2, 4, 5],
+                 types=["i", "s", "s"],
+                 down_ops=[['subsample', 2], ['subsample', 2], ['']],
+                 distillation=False):
+        super().__init__()
+
+        # --- SHARED STEM ---
+        self.patch_embed = nn.Sequential(
+            Conv2d_BN(in_chans, embed_dim[0] // 8, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 8, embed_dim[0] // 4, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 4, embed_dim[0] // 2, 3, 2, 1), nn.ReLU(),
+            Conv2d_BN(embed_dim[0] // 2, embed_dim[0], 3, 2, 1)
+        )
+
+        # --- SHARED STAGE 1 ---
+        # FIX: Use a list and unpack to Sequential to get default keys "0", "1", ...
+        blocks1_layers = []
+        for d in range(depth[0]):
+            blocks1_layers.append(BasicBlock(embed_dim[0], qk_dim[0], partial_dim[0], types[0]))
+        self.blocks1 = nn.Sequential(*blocks1_layers)
+
+        # --- BRANCH A (Head A) ---
+        self.ds_1_to_2_A = self._make_downsample(embed_dim, 0)
+        self.blocks2_A = self._make_stage(embed_dim[1], qk_dim[1], partial_dim[1], depth[1], types[1])
+        
+        self.ds_2_to_3_A = self._make_downsample(embed_dim, 1)
+        self.blocks3_A = self._make_stage(embed_dim[2], qk_dim[2], partial_dim[2], depth[2], types[2])
+
+        # --- BRANCH B (Head B) ---
+        self.ds_1_to_2_B = self._make_downsample(embed_dim, 0)
+        self.blocks2_B = self._make_stage(embed_dim[1], qk_dim[1], partial_dim[1], depth[1], types[1])
+        
+        self.ds_2_to_3_B = self._make_downsample(embed_dim, 1)
+        self.blocks3_B = self._make_stage(embed_dim[2], qk_dim[2], partial_dim[2], depth[2], types[2])
+
+        # --- BRANCH C (Head C) ---
+        self.ds_1_to_2_C = self._make_downsample(embed_dim, 0)
+        self.blocks2_C = self._make_stage(embed_dim[1], qk_dim[1], partial_dim[1], depth[1], types[1])
+        
+        self.ds_2_to_3_C = self._make_downsample(embed_dim, 1)
+        self.blocks3_C = self._make_stage(embed_dim[2], qk_dim[2], partial_dim[2], depth[2], types[2])
+
+        # --- FUSION ---
+        self.fusion_conv = Conv2d_BN(embed_dim[2] * 3, embed_dim[2], 1, 1, 0)
+        self.head = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else nn.Identity()
+
+    def _make_downsample(self, embed_dim, idx):
+        layers = []
+        # 1. Pre-proc (Matches original blocks[0])
+        layers.append(nn.Sequential(
+            Residual(Conv2d_BN(embed_dim[idx], embed_dim[idx], 3, 1, 1, groups=embed_dim[idx])),
+            Residual(FFN(embed_dim[idx], int(embed_dim[idx] * 2))),
+        ))
+        # 2. Patch Merging (Matches original blocks[1])
+        layers.append(PatchMerging(embed_dim[idx], embed_dim[idx+1]))
+        
+        # 3. Post-proc (Matches original blocks[2])
+        layers.append(nn.Sequential(
+            Residual(Conv2d_BN(embed_dim[idx+1], embed_dim[idx+1], 3, 1, 1, groups=embed_dim[idx+1])),
+            Residual(FFN(embed_dim[idx+1], int(embed_dim[idx+1] * 2))),
+        ))
+        return nn.Sequential(*layers)
+
+    def _make_stage(self, ed, kd, pd, dpth, typ):
+        layers = []
+        for d in range(dpth):
+            layers.append(BasicBlock(ed, kd, pd, typ))
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        x = self.patch_embed(x)
+        x = self.blocks1(x)
+
+        # Branch A
+        xA = self.ds_1_to_2_A(x)
+        xA = self.blocks2_A(xA)
+        xA = self.ds_2_to_3_A(xA)
+        xA = self.blocks3_A(xA)
+
+        # Branch B
+        xB = self.ds_1_to_2_B(x)
+        xB = self.blocks2_B(xB)
+        xB = self.ds_2_to_3_B(xB)
+        xB = self.blocks3_B(xB)
+
+        # Branch C
+        xC = self.ds_1_to_2_C(x)
+        xC = self.blocks2_C(xC)
+        xC = self.ds_2_to_3_C(xC)
+        xC = self.blocks3_C(xC)
+
+        x_cat = torch.cat([xA, xB, xC], dim=1)
+        x_fused = self.fusion_conv(x_cat)
+        
+        x_out = torch.nn.functional.adaptive_avg_pool2d(x_fused, 1).flatten(1)
+        x_out = self.head(x_out)
+        return x_out
+
+def load_finetuned_monster(checkpoint_path, num_classes=1000, device='cuda', model_cfg=None):
+    print(f"Loading finetuned monster from {checkpoint_path}...")
+    if model_cfg is None:
+        if 's4' in checkpoint_path:
+            model_cfg = SHViT_s4
+        elif 's3' in checkpoint_path:
+            model_cfg = SHViT_s3
+        elif 's2' in checkpoint_path:
+            model_cfg = SHViT_s2
+        else:
+            model_cfg = SHViT_s1
+            
+    # Always initialize with 1000 classes to match standard checkpoints
+    monster = DoubleHeadSHViT(num_classes=num_classes, **model_cfg)
+    
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    if isinstance(checkpoint, dict) and "model" in checkpoint:
+        state_dict = checkpoint["model"]
+    else:
+        state_dict = checkpoint
+        
+    monster.load_state_dict(state_dict)
+    
+    # If the user requested a different number of classes, replace the head
+    if num_classes != 1000:
+        print(f"Modifying head: 1000 -> {num_classes} classes")
+        in_features = monster.head.l.in_features
+        monster.head = BN_Linear(in_features, num_classes)
+        
+    monster.to(device)
+    monster.eval()
+    print("Monster loaded and ready!")
+    return monster
+
+def load_finetuned_triple_monster(checkpoint_path, num_classes=1000, device='cuda', model_cfg=None):
+    print(f"Loading finetuned triple monster from {checkpoint_path}...")
+    if model_cfg is None:
+        if 's4' in checkpoint_path:
+            model_cfg = SHViT_s4
+        elif 's3' in checkpoint_path:
+            model_cfg = SHViT_s3
+        elif 's2' in checkpoint_path:
+            model_cfg = SHViT_s2
+        else:
+            model_cfg = SHViT_s1
+            
+    # Always initialize with 1000 classes to match standard checkpoints
+    monster = TripleHeadSHViT(num_classes=num_classes, **model_cfg)
+    
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    if isinstance(checkpoint, dict) and "model" in checkpoint:
+        state_dict = checkpoint["model"]
+    else:
+        state_dict = checkpoint
+        
+    monster.load_state_dict(state_dict)
+    
+    # If the user requested a different number of classes, replace the head
+    if num_classes != 1000:
+        print(f"Modifying head: 1000 -> {num_classes} classes")
+        in_features = monster.head.l.in_features
+        monster.head = BN_Linear(in_features, num_classes)
+        
+    monster.to(device)
+    monster.eval()
+    print("Triple Monster loaded and ready!")
+    return monster

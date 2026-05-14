@@ -1,0 +1,46 @@
+Environment is ready.
+========================================================
+Processing Model: vit_tiny_patch16_224
+Checkpoint: 111
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7974
+ash_b          : 0.3956
+msp            : 0.7766
+ml             : 0.8157
+energy         : 0.8140
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8375
+ash_b          : 0.3912
+msp            : 0.8626
+ml             : 0.8672
+energy         : 0.8563
+Finished 
+

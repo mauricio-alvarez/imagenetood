@@ -1,0 +1,90 @@
+Environment is ready.
+========================================================
+Processing Model: doublehead_vit
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: doublehead_vit)...
+Requesting Model: doublehead_vit
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs.pth...
+Monster loaded and ready!
+Generating OOD Scores...
+Loading model (Env: doublehead_vit)...
+Requesting Model: doublehead_vit
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs.pth...
+Monster loaded and ready!
+Evaluating...
+Finished 
+
+========================================================
+Processing Model: vit_tiny_patch16_224
+Checkpoint: vit_tiny_patch16_224
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Error loading timm model vit_tiny_patch16_224: Cannot send a request, as the client has been closed.
+Generating OOD Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Error loading timm model vit_tiny_patch16_224: Cannot send a request, as the client has been closed.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7974
+ash_b          : 0.3956
+msp            : 0.7766
+ml             : 0.8157
+energy         : 0.8140
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8375
+ash_b          : 0.3912
+msp            : 0.8626
+ml             : 0.8672
+energy         : 0.8563
+Finished 
+
+========================================================
+Processing Model: vit_small_patch16_224
+Checkpoint: vit_small_patch16_224
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Trying to download model!----
+Error loading timm model vit_small_patch16_224: Cannot send a request, as the client has been closed.
+Generating OOD Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Trying to download model!----
+Error loading timm model vit_small_patch16_224: Cannot send a request, as the client has been closed.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7283
+ash_b          : 0.6169
+msp            : 0.7323
+ml             : 0.7477
+energy         : 0.7361
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8328
+ash_b          : 0.6102
+msp            : 0.8676
+ml             : 0.8436
+energy         : 0.8038
+Finished 
+

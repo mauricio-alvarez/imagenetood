@@ -1,0 +1,14 @@
+Environment is ready.
+========================================================
+Processing Model: vit_tiny_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...

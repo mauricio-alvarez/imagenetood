@@ -1,0 +1,49 @@
+Environment is ready.
+========================================================
+Processing Model: shvit_s1
+========================================================
+Generating ID Scores...
+Loading model (Env: shvit_s1)...
+Requesting Model: shvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s1.pth
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Skipping Max Cosine: 'BN_Linear' object has no attribute 'weight'
+Skipping ASH: 'BN_Linear' object has no attribute 'weight'
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s1/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: shvit_s1)...
+Requesting Model: shvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s1.pth
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Skipping Max Cosine: 'BN_Linear' object has no attribute 'weight'
+Skipping ASH: 'BN_Linear' object has no attribute 'weight'
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s1/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+msp            : 0.7641
+ml             : 0.7371
+energy         : 0.6401
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+msp            : 0.8494
+ml             : 0.8076
+energy         : 0.6722
+Finished shvit_s1
+

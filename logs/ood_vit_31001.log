@@ -1,0 +1,6 @@
+Environment is ready.
+========================================================
+Processing Model: doublehvit_s1
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+========================================================
+Generating ID Scores...

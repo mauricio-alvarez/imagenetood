@@ -1,0 +1,165 @@
+Environment is ready.
+========================================================
+Processing Model: shvit_s1
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s1.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: shvit_s1)...
+Requesting Model: shvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s1.pth
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s1/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: shvit_s1)...
+Requesting Model: shvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s1.pth
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s1/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.4797
+ash_b          : 0.2698
+msp            : 0.7641
+ml             : 0.7371
+energy         : 0.6401
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.4774
+ash_b          : 0.2370
+msp            : 0.8494
+ml             : 0.8076
+energy         : 0.6722
+Finished 
+
+========================================================
+Processing Model: shvit_s4
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s4.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: shvit_s4)...
+Requesting Model: shvit_s4
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s4.pth
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s4/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: shvit_s4)...
+Requesting Model: shvit_s4
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/SHViT/shvit_s4.pth
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/shvit_s4/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.5027
+ash_b          : 0.4324
+msp            : 0.7797
+ml             : 0.7519
+energy         : 0.6667
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.5245
+ash_b          : 0.4277
+msp            : 0.8496
+ml             : 0.8079
+energy         : 0.6918
+Finished 
+
+========================================================
+Processing Model: doublehead_vit
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: doublehead_vit)...
+Requesting Model: doublehead_vit
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs_pretrained.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/doublehead_vit/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: doublehead_vit)...
+Requesting Model: doublehead_vit
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/shvit_s1_doublehead_0103_300epochs_pretrained.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/doublehead_vit/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7854
+ash_b          : 0.4313
+msp            : 0.7646
+ml             : 0.7792
+energy         : 0.7730
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8497
+ash_b          : 0.4145
+msp            : 0.8633
+ml             : 0.8460
+energy         : 0.8269
+Finished 
+
+ViT Base
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.8387
+ash_b          : 0.4597
+msp            : 0.7983
+ml             : 0.7854
+energy         : 0.7587
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8569
+ash_b          : 0.4603
+msp            : 0.8488
+ml             : 0.8178
+energy         : 0.7675
+Finished vit_base_patch16_224

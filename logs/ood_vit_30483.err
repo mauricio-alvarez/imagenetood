@@ -1,0 +1,104 @@
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/VCC/imagenetood/results/vit_small_patch16_224/id_scores.pkl'
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 125, in get_model
+    state_dict = torch.load(checkpoint_path, map_location='cuda')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 1004, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/serialization.py", line 456, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/VCC/imagenetood/results/vit_base_patch16_224/id_scores.pkl'

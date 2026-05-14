@@ -1,0 +1,96 @@
+  0%|          | 0/1563 [00:00<?, ?it/s]  0%|          | 0/1563 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/preprocess.py", line 87, in <module>
+    for x, y in tqdm(train_dataloader):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/tqdm/std.py", line 1195, in __iter__
+    for obj in iterable:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1346, in _next_data
+    return self._process_data(data)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1372, in _process_data
+    data.reraise()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/_utils.py", line 705, in reraise
+    raise exception
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 308, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 49, in __getitem__
+    img = Image.open(img_path).convert('RGB')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/PIL/Image.py", line 3512, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenet_val/imagenet_val/n02119789/n02119789_12623.JPEG'
+
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 21, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/id_scores.pkl'
+  0%|          | 0/1563 [00:00<?, ?it/s]  0%|          | 0/1563 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/preprocess.py", line 87, in <module>
+    for x, y in tqdm(train_dataloader):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/tqdm/std.py", line 1195, in __iter__
+    for obj in iterable:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1346, in _next_data
+    return self._process_data(data)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1372, in _process_data
+    data.reraise()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/_utils.py", line 705, in reraise
+    raise exception
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 308, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 49, in __getitem__
+    img = Image.open(img_path).convert('RGB')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/PIL/Image.py", line 3512, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenet_val/imagenet_val/n02119789/n02119789_12623.JPEG'
+
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 21, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/id_scores.pkl'
+  0%|          | 0/1563 [00:00<?, ?it/s]  0%|          | 0/1563 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/preprocess.py", line 87, in <module>
+    for x, y in tqdm(train_dataloader):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/tqdm/std.py", line 1195, in __iter__
+    for obj in iterable:
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1346, in _next_data
+    return self._process_data(data)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1372, in _process_data
+    data.reraise()
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/_utils.py", line 705, in reraise
+    raise exception
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 308, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 49, in __getitem__
+    img = Image.open(img_path).convert('RGB')
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/PIL/Image.py", line 3512, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenet_val/imagenet_val/n02119789/n02119789_12623.JPEG'
+
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 21, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_large_patch16_224/id_scores.pkl'

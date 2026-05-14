@@ -1,0 +1,178 @@
+Environment is ready.
+========================================================
+Processing Model: doublehvit_s1
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: doublehvit_s1)...
+Requesting Model: doublehvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+
+==============================
+ImageNet Results
+Accuracy (%):		 71.76
+RMS Calib Error (%):	 5.44
+AURRA (%):		 91.23
+==============================
+
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/doublehvit_s1/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: doublehvit_s1)...
+Requesting Model: doublehvit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/model_weights/DoubleHeadViT/shvit_s1_doublehead_0103_300epochs_pretrained.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/doublehvit_s1/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7854
+ash_b          : 0.4313
+msp            : 0.7646
+ml             : 0.7792
+energy         : 0.7730
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8497
+ash_b          : 0.4145
+msp            : 0.8633
+ml             : 0.8460
+energy         : 0.8269
+Finished 
+
+========================================================
+Processing Model: doublehvit_s4
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/3_shvit_s4_doublehead_0405_150epochs.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: doublehvit_s4)...
+Requesting Model: doublehvit_s4
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/3_shvit_s4_doublehead_0405_150epochs.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/3_shvit_s4_doublehead_0405_150epochs.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+
+==============================
+ImageNet Results
+Accuracy (%):		 76.63
+RMS Calib Error (%):	 7.63
+AURRA (%):		 93.43
+==============================
+
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/doublehvit_s4/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: doublehvit_s4)...
+Requesting Model: doublehvit_s4
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/3_shvit_s4_doublehead_0405_150epochs.pth
+Loading finetuned monster from /home/mauricio.alvarez/tesis/VCC/3_shvit_s4_doublehead_0405_150epochs.pth...
+Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/doublehvit_s4/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.8175
+ash_b          : 0.4353
+msp            : 0.7843
+ml             : 0.7968
+energy         : 0.7920
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8678
+ash_b          : 0.4238
+msp            : 0.8659
+ml             : 0.8449
+energy         : 0.8294
+Finished 
+
+========================================================
+Processing Model: tripleh_vit_s1
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/4_shvit_s1_triplehead_0405_150epochs.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: tripleh_vit_s1)...
+Requesting Model: tripleh_vit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/4_shvit_s1_triplehead_0405_150epochs.pth
+Loading finetuned triple monster from /home/mauricio.alvarez/tesis/VCC/4_shvit_s1_triplehead_0405_150epochs.pth...
+Triple Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+
+==============================
+ImageNet Results
+Accuracy (%):		 72.02
+RMS Calib Error (%):	 4.86
+AURRA (%):		 91.30
+==============================
+
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/tripleh_vit_s1/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: tripleh_vit_s1)...
+Requesting Model: tripleh_vit_s1
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/4_shvit_s1_triplehead_0405_150epochs.pth
+Loading finetuned triple monster from /home/mauricio.alvarez/tesis/VCC/4_shvit_s1_triplehead_0405_150epochs.pth...
+Triple Monster loaded and ready!
+Fusing BN_Linear head into standard Linear layer for evaluation compatibility...
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/VCC/imagenetood/results/tripleh_vit_s1/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7870
+ash_b          : 0.4340
+msp            : 0.7678
+ml             : 0.7786
+energy         : 0.7701
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8514
+ash_b          : 0.4154
+msp            : 0.8644
+ml             : 0.8472
+energy         : 0.8272
+Finished 
+

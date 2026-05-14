@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/id_scores.pkl'
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/id_scores.pkl'
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/generate_scores.py", line 18, in <module>
+    from dataset import ImageNet_Format, ImageNetOOD, Generic_Subset, ImageNetOOD_standalone
+  File "/home/mauricio.alvarez/tesis/imagenetood/dataset.py", line 110, in <module>
+    class ImageNetOOD_standalone(ImageFolder):
+NameError: name 'ImageFolder' is not defined
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/imagenetood/results/vit_large_patch16_224/id_scores.pkl'

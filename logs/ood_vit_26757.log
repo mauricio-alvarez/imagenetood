@@ -1,0 +1,112 @@
+Environment is ready.
+========================================================
+Processing Model: vit_tiny_patch16_224
+========================================================
+Running Preprocess...
+started preprocess
+loading model...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Model downloaded!---
+Using transform: Compose(
+    Resize(size=248, interpolation=bicubic, max_size=None, antialias=True)
+    CenterCrop(size=(224, 224))
+    MaybeToTensor()
+    Normalize(mean=tensor([0.5000, 0.5000, 0.5000]), std=tensor([0.5000, 0.5000, 0.5000]))
+)
+Hooking into layer: Linear(in_features=192, out_features=1000, bias=True)
+loading data...
+Extracting features...
+Generating ID Scores...
+loading model...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Generating OOD Scores...
+loading model...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Evaluating...
+Finished vit_tiny_patch16_224
+
+========================================================
+Processing Model: vit_base_patch16_224
+========================================================
+Running Preprocess...
+started preprocess
+loading model...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!---
+Using transform: Compose(
+    Resize(size=248, interpolation=bicubic, max_size=None, antialias=True)
+    CenterCrop(size=(224, 224))
+    MaybeToTensor()
+    Normalize(mean=tensor([0.5000, 0.5000, 0.5000]), std=tensor([0.5000, 0.5000, 0.5000]))
+)
+Hooking into layer: Linear(in_features=768, out_features=1000, bias=True)
+loading data...
+Extracting features...
+Generating ID Scores...
+loading model...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Generating OOD Scores...
+loading model...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Evaluating...
+Finished vit_base_patch16_224
+
+========================================================
+Processing Model: vit_large_patch16_224
+========================================================
+Running Preprocess...
+started preprocess
+loading model...
+Requesting Model: vit_large_patch16_224
+Trying to download model!----
+Model downloaded!---
+Using transform: Compose(
+    Resize(size=248, interpolation=bicubic, max_size=None, antialias=True)
+    CenterCrop(size=(224, 224))
+    MaybeToTensor()
+    Normalize(mean=tensor([0.5000, 0.5000, 0.5000]), std=tensor([0.5000, 0.5000, 0.5000]))
+)
+Hooking into layer: Linear(in_features=1024, out_features=1000, bias=True)
+loading data...
+Extracting features...
+Generating ID Scores...
+loading model...
+Requesting Model: vit_large_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Generating OOD Scores...
+loading model...
+Requesting Model: vit_large_patch16_224
+Trying to download model!----
+Model downloaded!---
+loading training stats...
+Error: Could not find preprocessed files in .
+Make sure to run preprocess.py first and output to the same directory.
+Evaluating...
+Finished vit_large_patch16_224
+

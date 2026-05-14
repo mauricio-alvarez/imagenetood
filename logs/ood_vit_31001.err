@@ -1,0 +1,5 @@
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+slurmstepd-g001: error: *** JOB 31001 ON g001 CANCELLED AT 2026-04-30T17:39:12 ***

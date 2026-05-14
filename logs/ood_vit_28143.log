@@ -1,0 +1,103 @@
+Environment is ready.
+========================================================
+Processing Model: vit_base_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_base_02.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!----
+Patching ViT with PrunableAttention layers...
+Loading pruned weights from: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_base_02.pth
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!----
+Patching ViT with PrunableAttention layers...
+Loading pruned weights from: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_base_02.pth
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.5949
+ash_b          : 0.5385
+msp            : 0.5832
+ml             : 0.5916
+energy         : 0.5868
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.7967
+ash_b          : 0.5446
+msp            : 0.7825
+ml             : 0.7746
+energy         : 0.7443
+Finished 
+
+========================================================
+Processing Model: vit_small_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_small_02.pth
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Trying to download model!----
+Model downloaded!----
+Patching ViT with PrunableAttention layers...
+Loading pruned weights from: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_small_02.pth
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_small_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Trying to download model!----
+Model downloaded!----
+Patching ViT with PrunableAttention layers...
+Loading pruned weights from: /home/mauricio.alvarez/tesis/sanity-check/pruned_vit_small_02.pth
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_small_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7283
+ash_b          : 0.6169
+msp            : 0.7323
+ml             : 0.7477
+energy         : 0.7361
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8328
+ash_b          : 0.6102
+msp            : 0.8676
+ml             : 0.8436
+energy         : 0.8038
+Finished 
+

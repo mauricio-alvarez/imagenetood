@@ -1,0 +1,139 @@
+Environment is ready.
+========================================================
+Processing Model: vit_tiny_patch16_224
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_tiny_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+    ------------------------------
+    AUROC New Class Detection (OOD)
+    ------------------------------
+    Maximum Cosine : 0.7973
+    ash_b          : 0.3956
+    msp            : 0.7766
+    ml             : 0.8156
+    energy         : 0.8140
+
+    ------------------------------
+    AUROC Failure Detection (Misclassification)
+    ------------------------------
+    Maximum Cosine : 0.8375
+    ash_b          : 0.3912
+    msp            : 0.8626
+    ml             : 0.8673
+    energy         : 0.8563
+    Finished vit_tiny_patch16_224 -> PreTrain IMG 21K - FineTuned IMG 1K
+
+========================================================
+Processing Model: vit_base_patch16_224
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_base_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.8387
+ash_b          : 0.4597
+msp            : 0.7983
+ml             : 0.7854
+energy         : 0.7587
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8569
+ash_b          : 0.4603
+msp            : 0.8488
+ml             : 0.8178
+energy         : 0.7675
+Finished vit_base_patch16_224
+
+========================================================
+Processing Model: vit_large_patch16_224
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_large_patch16_224)...
+Requesting Model: vit_large_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNet...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_large_patch16_224/id_scores.pkl...
+Done.
+Generating OOD Scores...
+Loading model (Env: vit_large_patch16_224)...
+Requesting Model: vit_large_patch16_224
+Trying to download model!----
+Model downloaded!---
+Skipping training stats loading (Running inference-only methods).
+Loading data for ImageNetOOD...
+Running Inference...
+Calculating Scores (Inference Only)...
+Saving scores to /home/mauricio.alvarez/tesis/imagenetood/results/vit_large_patch16_224/ood_scores.pkl...
+Done.
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.9189
+ash_b          : 0.5111
+msp            : 0.8641
+ml             : 0.9063
+energy         : 0.9079
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.9259
+ash_b          : 0.5150
+msp            : 0.9026
+ml             : 0.9177
+energy         : 0.9136
+Finished vit_large_patch16_224
+

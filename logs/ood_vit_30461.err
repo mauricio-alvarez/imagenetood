@@ -1,0 +1,296 @@
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3054, in vit_tiny_patch16_224
+    model = _create_vision_transformer('vit_tiny_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3054, in vit_tiny_patch16_224
+    model = _create_vision_transformer('vit_tiny_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_small_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3090, in vit_small_patch16_224
+    model = _create_vision_transformer('vit_small_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_small_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3090, in vit_small_patch16_224
+    model = _create_vision_transformer('vit_small_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/VCC/imagenetood/results/vit_small_patch16_224/id_scores.pkl'
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_base_patch16_224.augreg2_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3138, in vit_base_patch16_224
+    model = _create_vision_transformer('vit_base_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+'[Errno -2] Name or service not known' thrown while requesting HEAD https://huggingface.co/timm/vit_base_patch16_224.augreg2_in21k_ft_in1k/resolve/main/model.safetensors
+Retrying in 1s [Retry 1/5].
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/generate_scores.py", line 42, in <module>
+    model = get_model()
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 131, in get_model
+    raise e
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/models.py", line 110, in get_model
+    model = timm.create_model(model_name, pretrained=(not is_pruned), **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_factory.py", line 138, in create_model
+    model = create_fn(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3138, in vit_base_patch16_224
+    model = _create_vision_transformer('vit_base_patch16_224', pretrained=pretrained, **dict(model_args, **kwargs))
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/vision_transformer.py", line 3038, in _create_vision_transformer
+    return build_model_with_cfg(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 457, in build_model_with_cfg
+    load_pretrained(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_builder.py", line 226, in load_pretrained
+    state_dict = load_state_dict_from_hf(pretrained_loc, weights_only=True, cache_dir=cache_dir)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/timm/models/_hub.py", line 226, in load_state_dict_from_hf
+    cached_safe_file = hf_hub_download(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1024, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1157, in _hf_hub_download_to_cache_dir
+    _get_metadata_or_catch_error(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1691, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1614, in get_hf_file_metadata
+    response = _httpx_follow_relative_redirects(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 302, in _httpx_follow_relative_redirects
+    response = http_backoff(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 506, in http_backoff
+    return next(
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 414, in _http_backoff_base
+    response = client.request(method=method, url=url, **kwargs)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/home/mauricio.alvarez/.conda/envs/imagenetood/lib/python3.10/site-packages/httpx/_client.py", line 901, in send
+    raise RuntimeError("Cannot send a request, as the client has been closed.")
+RuntimeError: Cannot send a request, as the client has been closed.
+Traceback (most recent call last):
+  File "/home/mauricio.alvarez/tesis/VCC/imagenetood/evaluate.py", line 17, in <module>
+    with open(args.in_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mauricio.alvarez/tesis/VCC/imagenetood/results/vit_base_patch16_224/id_scores.pkl'

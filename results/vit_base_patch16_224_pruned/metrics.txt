@@ -1,0 +1,18 @@
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.5949
+ash_b          : 0.5385
+msp            : 0.5832
+ml             : 0.5916
+energy         : 0.5868
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.7967
+ash_b          : 0.5446
+msp            : 0.7825
+ml             : 0.7746
+energy         : 0.7443

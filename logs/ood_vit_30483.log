@@ -1,0 +1,82 @@
+Environment is ready.
+========================================================
+Processing Model: vit_tiny_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_tiny_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Generating OOD Scores...
+Loading model (Env: vit_tiny_patch16_224)...
+Requesting Model: vit_tiny_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_tiny_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Evaluating...
+Evaluating 1 model(s) found in pickle file.
+------------------------------
+AUROC New Class Detection (OOD)
+------------------------------
+Maximum Cosine : 0.7974
+ash_b          : 0.3956
+msp            : 0.7766
+ml             : 0.8157
+energy         : 0.8140
+
+------------------------------
+AUROC Failure Detection (Misclassification)
+------------------------------
+Maximum Cosine : 0.8375
+ash_b          : 0.3912
+msp            : 0.8626
+ml             : 0.8672
+energy         : 0.8563
+Finished 
+
+========================================================
+Processing Model: vit_small_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/S_16-i21k-300ep-lr_0.001-aug_light1-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/S_16-i21k-300ep-lr_0.001-aug_light1-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_small_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Generating OOD Scores...
+Loading model (Env: vit_small_patch16_224)...
+Requesting Model: vit_small_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/S_16-i21k-300ep-lr_0.001-aug_light1-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_small_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Evaluating...
+Finished 
+
+========================================================
+Processing Model: vit_base_patch16_224
+Checkpoint: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/B_16-i21k-300ep-lr_0.001-aug_medium1-wd_0.1-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.01-res_224.npz
+========================================================
+Generating ID Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/B_16-i21k-300ep-lr_0.001-aug_medium1-wd_0.1-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.01-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_base_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Generating OOD Scores...
+Loading model (Env: vit_base_patch16_224)...
+Requesting Model: vit_base_patch16_224
+Loading local weights from: /home/mauricio.alvarez/tesis/VCC/model_cache/hub/checkpoints/B_16-i21k-300ep-lr_0.001-aug_medium1-wd_0.1-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.01-res_224.npz
+Trying to download model!----
+Model downloaded!----
+Error loading timm model vit_base_patch16_224: Expected hasRecord("version") to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+Evaluating...
+Finished 
+
